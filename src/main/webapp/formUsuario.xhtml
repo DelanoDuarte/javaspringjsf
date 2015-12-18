@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>New User</title>
+
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid>
+
+			<h:selectOneMenu value="#{userController.user.role}"
+				converter="#{roleConverter}">
+
+				<f:selectItem itemLabel="Selecione" itemValue=""
+					noSelectionOption="true" />
+				<f:selectItems value="#{roleController.roleList}" var="_role"
+					itemLabel="#{_role.type}">
+
+				</f:selectItems>
+			</h:selectOneMenu>
+
+			<h:outputLabel value="Name:" />
+			<h:inputText value="#{userController.user.name}" required="true"
+				requiredMessage="Nome Obrigatório">
+				<p:tooltip value="Name of User" />
+			</h:inputText>
+			<br />
+
+			<h:outputLabel value="Login:" />
+			<h:inputText value="#{userController.user.login}" required="true" />
+			<br />
+			<h:outputLabel value="Password:" />
+			<h:inputText value="#{userController.user.senha}" required="true" />
+
+			<h:commandButton value="Save"
+				actionListener="#{userController.saveUser}" />
+		</h:panelGrid>
+	</h:form>
+
+	<h:form>
+		<h:messages />
+		<h:dataTable value="#{userController.userList}" var="user" border="1">
+			<f:facet name="header">User List</f:facet>
+
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				<h:outputLabel value="#{user.name}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Login</f:facet>
+				<h:outputLabel value="#{user.login}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Role</f:facet>
+				<h:outputLabel value="#{user.role}" />
+			</h:column>
+
+			<h:column>
+				<h:commandButton actionListener="#{userController.deleteUser(user)}"
+					value="Excluir" />
+			</h:column>
+
+			<h:column>
+				<h:commandButton actionListener="#{userController.editUser(user)}"
+					value="Update" />
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+
+</html>
