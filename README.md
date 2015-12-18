@@ -1,2 +1,3 @@
-# javaspringjsf
-Spring Application using JSF with Primefaces.
+# Sample Application using Spring and JSF.
+Spring Application using Postgresql, JPA/Hibernate 
+JSF with Primefaces.
